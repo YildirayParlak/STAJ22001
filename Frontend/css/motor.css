@@ -1,0 +1,225 @@
+/* ============================================
+   SMART FOOD FACTORY — MOTORS.CSS
+   Sadece motors.html sayfasına özel stiller
+   ============================================ */
+
+/* ============================================
+   ÖZET SATIRI (KPI)
+   ============================================ */
+.motors-kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+/* ============================================
+   MOTOR KARTLARI IZGARASI
+   ============================================ */
+.motors-page-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+}
+
+/* ============================================
+   TEK MOTOR KARTI
+   ============================================ */
+.motor-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.motor-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 28px rgba(0, 0, 0, 0.45);
+}
+
+/* Durmuş motor — sol kırmızı çizgi */
+.motor-card.stopped {
+    border-left: 3px solid var(--red);
+}
+
+/* Çalışan motor — sol yeşil çizgi */
+.motor-card.running {
+    border-left: 3px solid var(--green);
+}
+
+/* Arızalı motor — sol sarı çizgi */
+.motor-card.fault {
+    border-left: 3px solid var(--yellow);
+}
+
+/* ============================================
+   KART HEADER
+   ============================================ */
+.motor-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+    background: var(--bg-card-alt);
+    border-bottom: 1px solid var(--border);
+}
+
+.motor-card-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* M1, M2, M3, M4 etiketi */
+.motor-number {
+    background: var(--blue-dark);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 9px;
+    border-radius: 6px;
+    letter-spacing: .5px;
+}
+
+.motor-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+/* Çalışıyor / Durdu etiketi */
+.motor-card-status {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.motor-card-status.running { color: var(--green); }
+.motor-card-status.stopped { color: var(--red);   }
+.motor-card-status.fault   { color: var(--yellow); }
+
+/* ============================================
+   KART BODY — BİLGİ SATIRLARI
+   ============================================ */
+.motor-card-body {
+    padding: 14px 16px;
+}
+
+.motor-info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 7px 0;
+    border-bottom: 1px solid var(--border-light);
+    font-size: 13px;
+}
+
+.motor-info-row:last-of-type {
+    border-bottom: none;
+}
+
+.motor-info-label {
+    color: var(--text-muted);
+    font-size: 12px;
+}
+
+.motor-info-value {
+    color: var(--text-primary);
+    font-family: 'Courier New', monospace;
+    font-weight: 500;
+    font-size: 13px;
+}
+
+/* Renk durumları */
+.motor-info-value.ok    { color: var(--green);  }
+.motor-info-value.warn  { color: var(--yellow); }
+.motor-info-value.alarm { color: var(--red);    }
+
+/* ============================================
+   MOTOR YÜK ÇUBUĞU
+   ============================================ */
+.motor-load-section {
+    margin-top: 14px;
+}
+
+.motor-load-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+}
+
+.motor-load-label {
+    font-size: 11px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: .8px;
+}
+
+.motor-load-percent {
+    font-size: 12px;
+    color: var(--text-secondary);
+    font-family: 'Courier New', monospace;
+}
+
+.motor-load-bar {
+    height: 6px;
+    background: var(--bg-base);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.motor-load-fill {
+    height: 100%;
+    border-radius: 3px;
+    background: var(--blue);
+    transition: width .5s ease;
+}
+
+/* Yük durumuna göre renk */
+.motor-load-fill.high   { background: var(--red);    }
+.motor-load-fill.medium { background: var(--yellow); }
+.motor-load-fill.normal { background: var(--blue);   }
+
+/* ============================================
+   KART FOOTER — KONTROL BUTONLARI
+   ============================================ */
+.motor-card-footer {
+    display: flex;
+    gap: 10px;
+    padding: 12px 16px;
+    border-top: 1px solid var(--border);
+    background: var(--bg-card-alt);
+}
+
+.motor-card-footer .btn {
+    flex: 1;
+    justify-content: center;
+    font-size: 13px;
+    padding: 9px 12px;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 1024px) {
+    .motors-kpi-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 900px) {
+    .motors-page-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .motors-kpi-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .motor-card-footer {
+        flex-direction: column;
+    }
+}

@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Smart Food Factory — Alarmlar</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<div class="app-layout">
+
+    <!-- ============================================
+         SIDEBAR
+    ============================================= -->
+    <aside class="sidebar">
+
+        <div class="sidebar-logo">
+            <div class="logo-icon">🏭</div>
+            <div class="logo-title">Smart Food Factory</div>
+            <div class="logo-sub">Monitoring System</div>
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <div class="nav-section">Genel</div>
+
+            <a href="index.html" class="nav-item">
+                <span class="nav-icon">🏠</span>
+                Dashboard
+            </a>
+
+
+            <div class="nav-section">Fabrika</div>
+
+            <a href="motors.html" class="nav-item">
+                <span class="nav-icon">⚙️</span>
+                Motorlar
+            </a>
+
+            <a href="sensors.html" class="nav-item">
+                <span class="nav-icon">🌡️</span>
+                Sensörler
+            </a>
+
+            <a href="energy.html" class="nav-item">
+                <span class="nav-icon">⚡</span>
+                Enerji
+            </a>
+
+
+            <div class="nav-section">İzleme</div>
+
+            <a href="alarms.html" class="nav-item active">
+                <span class="nav-icon">🚨</span>
+                Alarmlar
+            </a>
+
+            <a href="logs.html" class="nav-item">
+                <span class="nav-icon">📜</span>
+                Loglar
+            </a>
+
+           
+
+
+            <div class="nav-section">Sistem</div>
+
+            <a href="settings.html" class="nav-item">
+                <span class="nav-icon">⚙️</span>
+                Ayarlar
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-footer">
+
+            <div class="operator-card">
+
+                <div class="op-avatar" id="opAvatar">
+                    OP
+                </div>
+
+                <div class="op-info">
+                    <div class="op-name" id="opName">
+                        Operatör
+                    </div>
+
+                    <div class="op-role">
+                        Operatör
+                    </div>
+                </div>
+
+                <div class="op-status"></div>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ============================================
+         MAIN AREA
+    ============================================= -->
+    <div class="main-area">
+
+
+        <!-- TOP BAR -->
+        <div class="topbar">
+
+            <div class="topbar-left">
+
+                <div class="page-title">
+                    Alarmlar
+                </div>
+
+                <div class="page-sub">
+                    Aktif ve geçmiş sistem alarmları
+                </div>
+
+            </div>
+
+
+            <div class="topbar-right">
+
+                <div class="status-badge ok" id="backendStatus">
+                    ● Sistem Aktif
+                </div>
+
+                <div class="topbar-clock" id="clock">
+                    00:00:00
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ============================================
+             PAGE CONTENT
+        ============================================= -->
+        <div class="page-content">
+
+
+            <!-- ========================================
+                 KPI ÖZETİ
+            ========================================= -->
+            <div class="kpi-grid">
+
+
+                <div class="kpi-card red">
+
+                    <div class="kpi-label">
+                        🚨 Aktif Alarm
+                    </div>
+
+                    <div class="kpi-value red" id="activeAlarmCount">
+                        0
+                    </div>
+
+                    <div class="kpi-sub">
+                        Şu anda aktif
+                    </div>
+
+                </div>
+
+
+                <div class="kpi-card yellow">
+
+                    <div class="kpi-label">
+                        ⚠ Kritik Alarm
+                    </div>
+
+                    <div class="kpi-value yellow" id="criticalAlarmCount">
+                        0
+                    </div>
+
+                    <div class="kpi-sub">
+                        Kritik seviye
+                    </div>
+
+                </div>
+
+
+                <div class="kpi-card blue">
+
+                    <div class="kpi-label">
+                        ✅ Kapanan Alarm
+                    </div>
+
+                    <div class="kpi-value blue" id="closedAlarmCount">
+                        0
+                    </div>
+
+                    <div class="kpi-sub">
+                        Geçmiş kayıt
+                    </div>
+
+                </div>
+
+
+                <div class="kpi-card purple">
+
+                    <div class="kpi-label">
+                        📋 Toplam Alarm
+                    </div>
+
+                    <div class="kpi-value purple" id="totalAlarmCount">
+                        0
+                    </div>
+
+                    <div class="kpi-sub">
+                        Tüm kayıtlar
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ========================================
+                 ALARM FİLTRELERİ
+            ========================================= -->
+            <div class="card">
+
+                <div class="card-title">
+                    🔎 Alarm Filtreleri
+                </div>
+
+                <div style="
+                    display:flex;
+                    gap:12px;
+                    flex-wrap:wrap;
+                    align-items:center;
+                ">
+
+                    <select id="statusFilter">
+                        <option value="all">Tüm Durumlar</option>
+                        <option value="active">Aktif</option>
+                        <option value="closed">Kapandı</option>
+                    </select>
+
+                    <select id="levelFilter">
+                        <option value="all">Tüm Seviyeler</option>
+                        <option value="critical">Critical</option>
+                        <option value="warning">Warning</option>
+                        <option value="info">Info</option>
+                    </select>
+
+                    <button
+                        class="btn btn-primary"
+                        id="refreshBtn"
+                    >
+                        ↻ Yenile
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- ========================================
+                 ALARM TABLOSU
+            ========================================= -->
+            <div class="card" style="margin-top:16px;">
+
+                <div class="card-title">
+                    🚨 Alarm Kayıtları
+                </div>
+
+
+                <div style="overflow-x:auto;">
+
+                    <table style="
+                        width:100%;
+                        border-collapse:collapse;
+                        min-width:900px;
+                    ">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>ID</th>
+
+                                <th>Kaynak</th>
+
+                                <th>Mesaj</th>
+
+                                <th>Seviye</th>
+
+                                <th>Durum</th>
+
+                                <th>Onay</th>
+
+                                <th>Oluşma</th>
+
+                                <th>Kapanma</th>
+
+                                <th>İşlem</th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="alarmTableBody">
+
+                            <!-- alarms.js burayı dolduracak -->
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+
+                <!-- Veri yoksa -->
+                <div
+                    id="emptyAlarmMessage"
+                    style="
+                        display:none;
+                        text-align:center;
+                        padding:30px;
+                        color:#64748b;
+                    "
+                >
+                    Alarm kaydı bulunamadı.
+                </div>
+
+            </div>
+
+        </div>
+        <!-- /page-content -->
+
+    </div>
+    <!-- /main-area -->
+
+</div>
+
+
+<script src="js/alarms.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Food Factory — Giriş</title>
+    <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+
+    <div class="login-wrapper">
+
+        <!-- GİRİŞ KARTI -->
+        <div class="login-card">
+
+            <!-- LOGO & BAŞLIK -->
+            <div class="login-header">
+                <div class="logo-icon">🏭</div>
+                <h1 class="login-title">Smart Food Factory</h1>
+                <p class="login-subtitle">Monitoring System — Operatör Girişi</p>
+            </div>
+
+            <!-- HATA / BAŞARI MESAJI -->
+            <div class="alert" id="alertBox" style="display:none;">
+                <span id="alertText"></span>
+            </div>
+
+            <!-- KULLANICI ADI -->
+            <div class="form-group">
+                <label class="form-label" for="username">Kullanıcı Adı</label>
+                <div class="input-wrapper">
+                    <span class="input-icon">👤</span>
+                    <input
+                        type="text"
+                        id="username"
+                        class="form-input"
+                        placeholder="kullanici_adi"
+                        autocomplete="username"
+                    />
+                </div>
+            </div>
+
+            <!-- ŞİFRE -->
+            <div class="form-group">
+                <label class="form-label" for="password">Şifre</label>
+                <div class="input-wrapper">
+                    <span class="input-icon">🔒</span>
+                    <input
+                        type="password"
+                        id="password"
+                        class="form-input"
+                        placeholder="••••••••"
+                        autocomplete="current-password"
+                    />
+                    <!-- Şifreyi göster/gizle -->
+                    <button
+                        type="button"
+                        class="eye-button"
+                        id="eyeBtn"
+                        onclick="togglePassword()"
+                        title="Şifreyi göster/gizle"
+                    >👁</button>
+                </div>
+            </div>
+
+            <!-- BENİ HATIRLA -->
+            <div class="form-options">
+                <label class="remember-label">
+                    <input type="checkbox" id="rememberMe" />
+                    <span>Beni hatırla</span>
+                </label>
+            </div>
+
+            <!-- GİRİŞ BUTONU -->
+            <button
+                type="button"
+                class="login-button"
+                id="loginBtn"
+                onclick="doLogin()"
+            >
+                <span id="btnText">Giriş Yap</span>
+                <span id="btnSpinner" style="display:none;">⏳ Kontrol ediliyor...</span>
+            </button>
+
+            <!-- SİSTEM BAĞLANTI DURUMU -->
+            <div class="system-status">
+                <div class="status-item">
+                    <span class="status-dot" id="apiDot"></span>
+                    <span class="status-label" id="apiText">API kontrol ediliyor...</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-dot" id="dbDot"></span>
+                    <span class="status-label" id="dbText">Veritabanı kontrol ediliyor...</span>
+                </div>
+            </div>
+
+        </div>
+        <!-- /login-card -->
+
+        <!-- ALT BİLGİ -->
+        <p class="footer-text">© 2024 Smart Food Factory Monitoring System</p>
+
+    </div>
+    <!-- /login-wrapper -->
+
+    <script src="js/login.js"></script>
+</body>
+</html>

@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Smart Food Factory — Dashboard</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<div class="app-layout">
+
+    <!-- ============================================
+         SIDEBAR
+    ============================================= -->
+    <aside class="sidebar">
+
+        <!-- LOGO -->
+        <div class="sidebar-logo">
+            <div class="logo-icon">🏭</div>
+
+            <div class="logo-title">
+                Smart Food Factory
+            </div>
+
+            <div class="logo-sub">
+                Monitoring System
+            </div>
+        </div>
+
+
+        <!-- NAVIGATION -->
+        <nav class="sidebar-nav">
+
+            <div class="nav-section">
+                Genel
+            </div>
+
+            <a href="index.html" class="nav-item active">
+                <span class="nav-icon">🏠</span>
+                Dashboard
+            </a>
+
+
+            <!-- FABRİKA -->
+            <div class="nav-section">
+                Fabrika
+            </div>
+
+            <a href="motors.html" class="nav-item">
+                <span class="nav-icon">⚙️</span>
+                Motorlar
+
+                <span class="nav-badge ok">
+                    4
+                </span>
+            </a>
+
+            <a href="sensors.html" class="nav-item">
+                <span class="nav-icon">🌡️</span>
+                Sensörler
+            </a>
+
+            <a href="energy.html" class="nav-item">
+                <span class="nav-icon">⚡</span>
+                Enerji
+            </a>
+
+
+            <!-- İZLEME -->
+            <div class="nav-section">
+                İzleme
+            </div>
+
+            <a href="alarms.html" class="nav-item">
+                <span class="nav-icon">🚨</span>
+                Alarmlar
+
+                <span class="nav-badge">
+                    2
+                </span>
+            </a>
+
+            <a href="logs.html" class="nav-item">
+                <span class="nav-icon">📜</span>
+                Loglar
+            </a>
+
+         
+
+
+            <!-- SİSTEM -->
+            <div class="nav-section">
+                Sistem
+            </div>
+
+            <a href="settings.html" class="nav-item">
+                <span class="nav-icon">⚙️</span>
+                Ayarlar
+            </a>
+
+        </nav>
+
+
+        <!-- OPERATOR -->
+        <div class="sidebar-footer">
+
+            <div class="operator-card">
+
+                <div
+                    class="op-avatar"
+                    id="opAvatar"
+                >
+                    OP
+                </div>
+
+                <div class="op-info">
+
+                    <div
+                        class="op-name"
+                        id="opName"
+                    >
+                        Operatör
+                    </div>
+
+                    <div class="op-role">
+                        Operatör
+                    </div>
+
+                </div>
+
+                <div class="op-status"></div>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ============================================
+         MAIN AREA
+    ============================================= -->
+    <div class="main-area">
+
+
+        <!-- ========================================
+             TOP BAR
+        ========================================= -->
+        <div class="topbar">
+
+            <div class="topbar-left">
+
+                <div class="page-title">
+                    Dashboard
+                </div>
+
+                <div class="page-sub">
+                    Gıda Fabrikası — Genel Bakış
+                </div>
+
+            </div>
+
+
+            <div class="topbar-right">
+
+                <!-- Gerçek PLC bağlantısı henüz yok -->
+                <div
+                    class="status-badge ok"
+                    id="plcStatus"
+                >
+                    ● PLC Simülasyonu Aktif
+                </div>
+
+                <div
+                    class="status-badge warn"
+                    id="warnBadge"
+                >
+                    ⚠ 1 Uyarı
+                </div>
+
+                <div
+                    class="status-badge alarm"
+                    id="alarmBadge"
+                >
+                    🚨 2 Alarm
+                </div>
+
+                <div
+                    class="topbar-clock"
+                    id="clock"
+                >
+                    00:00:00
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ========================================
+             PAGE CONTENT
+        ========================================= -->
+        <div class="page-content">
+
+
+            <!-- ====================================
+                 KPI KARTLARI
+            ===================================== -->
+            <div class="kpi-grid">
+
+
+                <!-- Aktif Motor -->
+                <div class="kpi-card green">
+
+                    <div class="kpi-label">
+                        ⚙️ Aktif Motor
+                    </div>
+
+                    <div
+                        class="kpi-value green"
+                        id="activeMotors"
+                    >
+                        3 / 4
+                    </div>
+
+                    <div
+                        class="kpi-sub"
+                        id="motorSub"
+                    >
+                        Motor 3 durdu
+                    </div>
+
+                </div>
+
+
+                <!-- Sıcaklık -->
+                <div class="kpi-card yellow">
+
+                    <div class="kpi-label">
+                        🌡️ Sıcaklık (Maks)
+                    </div>
+
+                    <div
+                        class="kpi-value yellow"
+                        id="maxTemp"
+                    >
+                        74.2°C
+                    </div>
+
+                    <div class="kpi-sub">
+                        Limit: 85°C
+                    </div>
+
+                </div>
+
+
+                <!-- Üretim -->
+                <div class="kpi-card blue">
+
+                    <div class="kpi-label">
+                        📦 Üretim Sayacı
+                    </div>
+
+                    <div
+                        class="kpi-value blue"
+                        id="production"
+                    >
+                        1.247
+                    </div>
+
+                    <div class="kpi-sub">
+                        Hedef: 2.000 adet
+                    </div>
+
+                </div>
+
+
+                <!-- Enerji -->
+                <div class="kpi-card purple">
+
+                    <div class="kpi-label">
+                        ⚡ Toplam Enerji
+                    </div>
+
+                    <div
+                        class="kpi-value purple"
+                        id="totalEnergy"
+                    >
+                        55.3 kW
+                    </div>
+
+                    <div class="kpi-sub">
+                        Bu vardiya
+                    </div>
+
+                </div>
+
+
+                <!-- Nem -->
+                <div class="kpi-card cyan">
+
+                    <div class="kpi-label">
+                        💧 Nem (Ort.)
+                    </div>
+
+                    <div
+                        class="kpi-value cyan"
+                        id="avgHumidity"
+                    >
+                        62%
+                    </div>
+
+                    <div class="kpi-sub">
+                        Normal aralık
+                    </div>
+
+                </div>
+
+
+                <!-- Basınç -->
+                <div class="kpi-card blue">
+
+                    <div class="kpi-label">
+                        🛢️ Basınç
+                    </div>
+
+                    <div
+                        class="kpi-value blue"
+                        id="pressure"
+                    >
+                        6.1 bar
+                    </div>
+
+                    <div class="kpi-sub">
+                        Limit: 8 bar
+                    </div>
+
+                </div>
+
+
+                <!-- Alarm -->
+                <div class="kpi-card red">
+
+                    <div class="kpi-label">
+                        🚨 Aktif Alarm
+                    </div>
+
+                    <div
+                        class="kpi-value red"
+                        id="alarmCount"
+                    >
+                        2
+                    </div>
+
+                    <div class="kpi-sub">
+                        Son 1 saatte
+                    </div>
+
+                </div>
+
+
+                <!-- Soğuk Hava -->
+                <div class="kpi-card green">
+
+                    <div class="kpi-label">
+                        ❄️ Soğuk Hava Dep.
+                    </div>
+
+                    <div
+                        class="kpi-value green"
+                        id="coldStorage"
+                    >
+                        -18°C
+                    </div>
+
+                    <div class="kpi-sub">
+                        Normal
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ====================================
+                 MOTORLAR + SENSÖRLER
+            ===================================== -->
+            <div class="mid-grid">
+
+
+                <!-- MOTOR DURUMU -->
+                <div class="card">
+
+                    <div class="card-title">
+                        ⚙️ Motor Durumu
+                    </div>
+
+
+                    <div class="motors-grid">
+
+
+                        <!-- Motor 1 -->
+                        <div class="motor-item running">
+
+                            <div class="motor-item-name">
+                                Konveyör Motor 1
+                            </div>
+
+                            <div class="motor-item-status running">
+                                ● Çalışıyor
+                            </div>
+
+                            <div
+                                class="motor-item-rpm"
+                                id="rpm1"
+                            >
+                                1450 rpm
+                            </div>
+
+                            <div class="progress-bar">
+                                <div
+                                    class="progress-fill"
+                                    style="
+                                        width:82%;
+                                        background:#22c55e;
+                                    "
+                                ></div>
+                            </div>
+
+                        </div>
+
+
+                        <!-- Motor 2 -->
+                        <div class="motor-item running">
+
+                            <div class="motor-item-name">
+                                Dolum Motor 2
+                            </div>
+
+                            <div class="motor-item-status running">
+                                ● Çalışıyor
+                            </div>
+
+                            <div
+                                class="motor-item-rpm"
+                                id="rpm2"
+                            >
+                                1380 rpm
+                            </div>
+
+                            <div class="progress-bar">
+                                <div
+                                    class="progress-fill"
+                                    style="
+                                        width:71%;
+                                        background:#22c55e;
+                                    "
+                                ></div>
+                            </div>
+
+                        </div>
+
+
+                        <!-- Motor 3 -->
+                        <div class="motor-item stopped">
+
+                            <div class="motor-item-name">
+                                Paketleme Motor 3
+                            </div>
+
+                            <div class="motor-item-status stopped">
+                                ● Durdu
+                            </div>
+
+                            <div
+                                class="motor-item-rpm"
+                                id="rpm3"
+                            >
+                                0 rpm
+                            </div>
+
+                            <div class="progress-bar">
+                                <div
+                                    class="progress-fill"
+                                    style="
+                                        width:0%;
+                                        background:#ef4444;
+                                    "
+                                ></div>
+                            </div>
+
+                        </div>
+
+
+                        <!-- Motor 4 -->
+                        <div class="motor-item running">
+
+                            <div class="motor-item-name">
+                                Soğutma Motor 4
+                            </div>
+
+                            <div class="motor-item-status running">
+                                ● Çalışıyor
+                            </div>
+
+                            <div
+                                class="motor-item-rpm"
+                                id="rpm4"
+                            >
+                                1500 rpm
+                            </div>
+
+                            <div class="progress-bar">
+                                <div
+                                    class="progress-fill"
+                                    style="
+                                        width:90%;
+                                        background:#22c55e;
+                                    "
+                                ></div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Grafik alanı -->
+                    <div
+                        class="mini-chart"
+                        id="motorChart"
+                    ></div>
+
+                </div>
+
+
+                <!-- ====================================
+                     SENSÖRLER
+                ===================================== -->
+                <div class="card">
+
+                    <div class="card-title">
+                        🌡️ Sensör Değerleri
+                    </div>
+
+
+                    <!-- Üretim sıcaklığı -->
+                    <div class="sensor-row">
+
+                        <span class="sensor-label">
+                            🌡️ Üretim Hattı Sıc.
+                        </span>
+
+                        <div class="sensor-right">
+
+                            <div class="sensor-bar-wrap">
+
+                                <div
+                                    class="sensor-bar-fill"
+                                    style="
+                                        width:87%;
+                                        background:#f59e0b;
+                                    "
+                                ></div>
+
+                            </div>
+
+                            <span
+                                class="sensor-value warn"
+                                id="sTemp"
+                            >
+                                74.2°C
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Soğuk depo -->
+                    <div class="sensor-row">
+
+                        <span class="sensor-label">
+                            ❄️ Soğuk Hava Dep.
+                        </span>
+
+                        <div class="sensor-right">
+
+                            <div class="sensor-bar-wrap">
+
+                                <div
+                                    class="sensor-bar-fill"
+                                    style="
+                                        width:20%;
+                                        background:#22d3ee;
+                                    "
+                                ></div>
+
+                            </div>
+
+                            <span
+                                class="sensor-value normal"
+                                id="sCold"
+                            >
+                                -18°C
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Nem -->
+                    <div class="sensor-row">
+
+                        <span class="sensor-label">
+                            💧 Nem
+                        </span>
+
+                        <div class="sensor-right">
+
+                            <div class="sensor-bar-wrap">
+
+                                <div
+                                    class="sensor-bar-fill"
+                                    style="
+                                        width:62%;
+                                        background:#3b82f6;
+                                    "
+                                ></div>
+
+                            </div>
+
+                            <span
+                                class="sensor-value normal"
+                                id="sHum"
+                            >
+                                62%
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Basınç -->
+                    <div class="sensor-row">
+
+                        <span class="sensor-label">
+                            🛢️ Hat Basıncı
+                        </span>
+
+                        <div class="sensor-right">
+
+                            <div class="sensor-bar-wrap">
+
+                                <div
+                                    class="sensor-bar-fill"
+                                    style="
+                                        width:65%;
+                                        background:#3b82f6;
+                                    "
+                                ></div>
+
+                            </div>
+
+                            <span
+                                class="sensor-value normal"
+                                id="sPress"
+                            >
+                                6.1 bar
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Depo nem -->
+                    <div class="sensor-row">
+
+                        <span class="sensor-label">
+                            📦 Depo Nem
+                        </span>
+
+                        <div class="sensor-right">
+
+                            <div class="sensor-bar-wrap">
+
+                                <div
+                                    class="sensor-bar-fill"
+                                    style="
+                                        width:45%;
+                                        background:#22c55e;
+                                    "
+                                ></div>
+
+                            </div>
+
+                            <span
+                                class="sensor-value ok"
+                                id="sDepHum"
+                            >
+                                45%
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Titreşim -->
+                    <div class="sensor-row">
+
+                        <span class="sensor-label">
+                            🔊 Titreşim
+                        </span>
+
+                        <div class="sensor-right">
+
+                            <div class="sensor-bar-wrap">
+
+                                <div
+                                    class="sensor-bar-fill"
+                                    style="
+                                        width:30%;
+                                        background:#22c55e;
+                                    "
+                                ></div>
+
+                            </div>
+
+                            <span
+                                class="sensor-value ok"
+                                id="sVib"
+                            >
+                                0.3g
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ENERJİ ÖZETİ -->
+                    <div
+                        class="card-title"
+                        style="margin-top:14px"
+                    >
+                        ⚡ Enerji Tüketimi
+                    </div>
+
+
+                    <div class="energy-row">
+
+                        <span class="energy-label">
+                            Konveyör M1
+                        </span>
+
+                        <div class="energy-bar-bg">
+
+                            <div
+                                class="energy-bar-fill"
+                                style="
+                                    width:82%;
+                                    background:#3b82f6;
+                                "
+                            ></div>
+
+                        </div>
+
+                        <span class="energy-val">
+                            18.4 kW
+                        </span>
+
+                    </div>
+
+
+                    <div class="energy-row">
+
+                        <span class="energy-label">
+                            Dolum M2
+                        </span>
+
+                        <div class="energy-bar-bg">
+
+                            <div
+                                class="energy-bar-fill"
+                                style="
+                                    width:70%;
+                                    background:#3b82f6;
+                                "
+                            ></div>
+
+                        </div>
+
+                        <span class="energy-val">
+                            15.7 kW
+                        </span>
+
+                    </div>
+
+
+                    <div class="energy-row">
+
+                        <span class="energy-label">
+                            Paketleme M3
+                        </span>
+
+                        <div class="energy-bar-bg">
+
+                            <div
+                                class="energy-bar-fill"
+                                style="
+                                    width:0%;
+                                    background:#ef4444;
+                                "
+                            ></div>
+
+                        </div>
+
+                        <span class="energy-val">
+                            0 kW
+                        </span>
+
+                    </div>
+
+
+                    <div
+                        class="energy-row"
+                        style="margin-bottom:0"
+                    >
+
+                        <span class="energy-label">
+                            Soğutma M4
+                        </span>
+
+                        <div class="energy-bar-bg">
+
+                            <div
+                                class="energy-bar-fill"
+                                style="
+                                    width:90%;
+                                    background:#3b82f6;
+                                "
+                            ></div>
+
+                        </div>
+
+                        <span class="energy-val">
+                            21.2 kW
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ====================================
+                 ALARM + HABERLEŞME + ÜRETİM
+            ===================================== -->
+            <div class="mid-grid-3">
+
+
+                <!-- ALARMLAR -->
+                <div class="card">
+
+                    <div class="card-title">
+                        🚨 Son Alarmlar
+                    </div>
+
+                    <div class="alarm-list">
+
+
+                        <div class="alarm-item">
+
+                            <div
+                                class="alarm-dot"
+                                style="background:#ef4444"
+                            ></div>
+
+                            <div class="alarm-msg">
+                                Paketleme M3 beklenmedik duruş
+                            </div>
+
+                            <div class="alarm-time">
+                                09:38
+                            </div>
+
+                        </div>
+
+
+                        <div class="alarm-item">
+
+                            <div
+                                class="alarm-dot"
+                                style="background:#f59e0b"
+                            ></div>
+
+                            <div class="alarm-msg">
+                                Üretim hattı sıcaklığı yüksek
+                            </div>
+
+                            <div class="alarm-time">
+                                09:40
+                            </div>
+
+                        </div>
+
+
+                        <div class="alarm-item">
+
+                            <div
+                                class="alarm-dot"
+                                style="background:#22c55e"
+                            ></div>
+
+                            <div class="alarm-msg">
+                                Hat basıncı normale döndü
+                            </div>
+
+                            <div class="alarm-time">
+                                09:25
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ====================================
+                     PLC / SİMÜLASYON HABERLEŞME
+                ===================================== -->
+                <div class="card">
+
+                    <div class="card-title">
+                        🔌 PLC / Sistem Haberleşme
+                    </div>
+
+
+                    <div class="sensor-row">
+
+                        <span class="sensor-label">
+                            Çalışma Modu
+                        </span>
+
+                        <span
+                            style="
+                                color:#94a3b8;
+                                font-family:'Courier New', monospace;
+                                font-size:12px;
+                            "
+                        >
+                            Simülasyon
+                        </span>
+
+                    </div>
+
+
+                    <div class="sensor-row">
+
+                        <span class="sensor-label">
+                            Backend
+                        </span>
+
+                        <span
+                            style="
+                                color:#22c55e;
+                                font-size:12px;
+                            "
+                        >
+                            ● FastAPI Aktif
+                        </span>
+
+                    </div>
+
+
+                    <div class="sensor-row">
+
+                        <span class="sensor-label">
+                            Veri Kaynağı
+                        </span>
+
+                        <span
+                            style="
+                                color:#94a3b8;
+                                font-family:'Courier New', monospace;
+                                font-size:12px;
+                            "
+                        >
+                            Python Simulation
+                        </span>
+
+                    </div>
+
+
+                    <div class="sensor-row">
+
+                        <span class="sensor-label">
+                            Son Güncelleme
+                        </span>
+
+                        <span
+                            class="sensor-value normal"
+                            id="lastUpdate"
+                        >
+                            0.3s
+                        </span>
+
+                    </div>
+
+
+                    <div
+                        class="sensor-row"
+                        style="border:none"
+                    >
+
+                        <span class="sensor-label">
+                            API Durumu
+                        </span>
+
+                        <span class="sensor-value ok">
+                            ● Online
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ====================================
+                     ÜRETİM BİLGİSİ
+                ===================================== -->
+                <div class="card">
+
+                    <div class="card-title">
+                        📦 Üretim Bilgisi
+                    </div>
+
+
+                    <div class="sensor-row">
+
+                        <span class="sensor-label">
+                            Vardiya
+                        </span>
+
+                        <span
+                            style="
+                                color:#94a3b8;
+                                font-size:12px;
+                            "
+                        >
+                            Sabah (06:00-14:00)
+                        </span>
+
+                    </div>
+
+
+                    <div class="sensor-row">
+
+                        <span class="sensor-label">
+                            Üretilen
+                        </span>
+
+                        <span class="sensor-value normal">
+                            1.247 adet
+                        </span>
+
+                    </div>
+
+
+                    <div class="sensor-row">
+
+                        <span class="sensor-label">
+                            Hedef
+                        </span>
+
+                        <span class="sensor-value ok">
+                            2.000 adet
+                        </span>
+
+                    </div>
+
+
+                    <div class="sensor-row">
+
+                        <span class="sensor-label">
+                            Verimlilik
+                        </span>
+
+                        <span class="sensor-value warn">
+                            %62
+                        </span>
+
+                    </div>
+
+
+                    <div
+                        class="sensor-row"
+                        style="border:none"
+                    >
+
+                        <span class="sensor-label">
+                            Hat Hızı
+                        </span>
+
+                        <span class="sensor-value normal">
+                            120 adet/dk
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ====================================
+                 SİSTEM LOGU
+            ===================================== -->
+            <div class="card">
+
+                <div class="card-title">
+
+                    📜 Sistem Logu
+
+                    <span
+                        style="
+                            margin-left:auto;
+                            font-size:10px;
+                            color:#475569;
+                        "
+                    >
+
+                        <a
+                            href="logs.html"
+                            style="color:#3b82f6"
+                        >
+                            Tümünü gör →
+                        </a>
+
+                    </span>
+
+                </div>
+
+
+                <div
+                    class="log-panel"
+                    id="logPanel"
+                >
+
+                    <div class="log-line err">
+                        [09:40:12] ALARM —
+                        Üretim hattı sıcaklığı yüksek:
+                        74.2°C
+                    </div>
+
+                    <div class="log-line warn">
+                        [09:38:55] UYARI —
+                        Paketleme M3 durduruldu.
+                        Op: Operatör
+                    </div>
+
+                    <div class="log-line info">
+                        [09:35:02] BİLGİ —
+                        Tüm sensörler güncellendi.
+                    </div>
+
+                    <div class="log-line ok">
+                        [09:30:00] SİSTEM —
+                        4 motor başlatıldı.
+                        Simülasyon sistemi aktif.
+                    </div>
+
+                    <div class="log-line info">
+                        [09:25:18] BİLGİ —
+                        Hat basıncı normale döndü:
+                        6.1 bar
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+        <!-- /page-content -->
+
+    </div>
+    <!-- /main-area -->
+
+</div>
+<!-- /app-layout -->
+
+
+<script src="js/dashboard.js"></script>
+
+</body>
+</html>

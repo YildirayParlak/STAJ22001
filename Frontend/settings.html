@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Smart Food Factory — Ayarlar</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/settings.css">
+</head>
+
+<body>
+
+<div class="app-layout">
+
+    <!-- ============================================
+         SIDEBAR
+    ============================================= -->
+    <aside class="sidebar">
+
+        <div class="sidebar-logo">
+            <div class="logo-icon">🏭</div>
+            <div class="logo-title">Smart Food Factory</div>
+            <div class="logo-sub">Monitoring System</div>
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <div class="nav-section">Genel</div>
+
+            <a href="index.html" class="nav-item">
+                <span class="nav-icon">🏠</span>
+                Dashboard
+            </a>
+
+
+            <div class="nav-section">Fabrika</div>
+
+            <a href="motors.html" class="nav-item">
+                <span class="nav-icon">⚙️</span>
+                Motorlar
+            </a>
+
+
+            <div class="nav-section">İzleme</div>
+
+            <a href="alarms.html" class="nav-item">
+                <span class="nav-icon">🚨</span>
+                Alarmlar
+            </a>
+
+            <a href="logs.html" class="nav-item">
+                <span class="nav-icon">📜</span>
+                Loglar
+            </a>
+
+
+            <div class="nav-section">Sistem</div>
+
+            <a href="settings.html" class="nav-item active">
+                <span class="nav-icon">⚙️</span>
+                Ayarlar
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-footer">
+
+            <div class="operator-card">
+
+                <div class="op-avatar" id="opAvatar">
+                    OP
+                </div>
+
+                <div class="op-info">
+
+                    <div class="op-name" id="opName">
+                        Operatör
+                    </div>
+
+                    <div class="op-role">
+                        Operatör
+                    </div>
+
+                </div>
+
+                <div class="op-status"></div>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ============================================
+         MAIN AREA
+    ============================================= -->
+    <div class="main-area">
+
+
+        <!-- TOPBAR -->
+        <div class="topbar">
+
+            <div class="topbar-left">
+
+                <div class="page-title">
+                    Sistem Ayarları
+                </div>
+
+                <div class="page-sub">
+                    Çalışma modu ve PLC haberleşme ayarları
+                </div>
+
+            </div>
+
+
+            <div class="topbar-right">
+
+                <div
+                    class="status-badge ok"
+                    id="backendStatus"
+                >
+                    ● Sistem Aktif
+                </div>
+
+                <div
+                    class="topbar-clock"
+                    id="clock"
+                >
+                    00:00:00
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ============================================
+             PAGE CONTENT
+        ============================================= -->
+        <div class="page-content">
+
+
+            <!-- ========================================
+                 1. ÇALIŞMA MODU
+            ========================================= -->
+            <div class="card settings-card">
+
+                <div class="card-title">
+                    🔄 Çalışma Modu
+                </div>
+
+                <div class="settings-description">
+                    Sistemin veri kaynağını seçin.
+                    Simulation Mode test amaçlı yerel verileri,
+                    PLC Mode ise gerçek PLC bağlantısını kullanır.
+                </div>
+
+
+                <div class="mode-selector">
+
+                    <label class="mode-option">
+
+                        <input
+                            type="radio"
+                            name="operationMode"
+                            value="simulation"
+                            id="simulationMode"
+                            checked
+                        >
+
+                        <div class="mode-content">
+
+                            <div class="mode-title">
+                                🧪 Simulation Mode
+                            </div>
+
+                            <div class="mode-description">
+                                PLC bağlantısı olmadan sistemi
+                                simülasyon verileriyle çalıştırır.
+                            </div>
+
+                        </div>
+
+                    </label>
+
+
+                    <label class="mode-option">
+
+                        <input
+                            type="radio"
+                            name="operationMode"
+                            value="plc"
+                            id="plcMode"
+                        >
+
+                        <div class="mode-content">
+
+                            <div class="mode-title">
+                                🔌 PLC Mode
+                            </div>
+
+                            <div class="mode-description">
+                                Gerçek PLC ile Modbus üzerinden
+                                haberleşir.
+                            </div>
+
+                        </div>
+
+                    </label>
+
+                </div>
+
+            </div>
+
+
+            <!-- ========================================
+                 2. PLC BAĞLANTI AYARLARI
+            ========================================= -->
+            <div
+                class="card settings-card"
+                id="plcSettingsSection"
+            >
+
+                <div class="card-title">
+                    🔌 PLC Bağlantı Ayarları
+                </div>
+
+                <div class="settings-description">
+                    PLC Mode kullanıldığında gerekli bağlantı
+                    bilgilerini buradan yapılandırabilirsiniz.
+                </div>
+
+
+                <div class="settings-grid">
+
+
+                    <!-- PLC MODEL -->
+                    <div class="form-group">
+
+                        <label for="plcModel">
+                            PLC Modeli
+                        </label>
+
+                        <select id="plcModel">
+
+                            <option value="fatek_fbs">
+                                FATEK FBs
+                            </option>
+
+                        </select>
+
+                        <small>
+                            Sistemde kullanılacak PLC ailesi.
+                        </small>
+
+                    </div>
+
+
+                    <!-- CONNECTION TYPE -->
+                    <div class="form-group">
+
+                        <label for="connectionType">
+                            Bağlantı Türü
+                        </label>
+
+                        <select id="connectionType">
+
+                            <option value="tcp">
+                                Modbus TCP
+                            </option>
+
+                            <option value="rtu">
+                                Modbus RTU / RS-485
+                            </option>
+
+                        </select>
+
+                        <small>
+                            PLC ile kullanılacak haberleşme protokolü.
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ====================================
+                     TCP AYARLARI
+                ===================================== -->
+                <div id="tcpSettings">
+
+                    <div class="section-subtitle">
+                        Modbus TCP Ayarları
+                    </div>
+
+                    <div class="settings-grid">
+
+                        <div class="form-group">
+
+                            <label for="plcIp">
+                                PLC IP Adresi
+                            </label>
+
+                            <input
+                                type="text"
+                                id="plcIp"
+                                placeholder="192.168.1.10"
+                                value="192.168.1.10"
+                            >
+
+                            <small>
+                                PLC'nin yerel ağdaki IP adresi.
+                            </small>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="plcPort">
+                                Port
+                            </label>
+
+                            <input
+                                type="number"
+                                id="plcPort"
+                                value="502"
+                            >
+
+                            <small>
+                                Modbus TCP varsayılan portu: 502
+                            </small>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="tcpSlaveId">
+                                Slave ID
+                            </label>
+
+                            <input
+                                type="number"
+                                id="tcpSlaveId"
+                                value="1"
+                            >
+
+                            <small>
+                                PLC Modbus cihaz adresi.
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ====================================
+                     RTU AYARLARI
+                ===================================== -->
+                <div
+                    id="rtuSettings"
+                    style="display:none;"
+                >
+
+                    <div class="section-subtitle">
+                        Modbus RTU / RS-485 Ayarları
+                    </div>
+
+                    <div class="settings-grid">
+
+
+                        <div class="form-group">
+
+                            <label for="comPort">
+                                COM Port
+                            </label>
+
+                            <input
+                                type="text"
+                                id="comPort"
+                                placeholder="COM3"
+                                value="COM3"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="baudRate">
+                                Baud Rate
+                            </label>
+
+                            <select id="baudRate">
+
+                                <option value="9600">
+                                    9600
+                                </option>
+
+                                <option value="19200">
+                                    19200
+                                </option>
+
+                                <option value="38400">
+                                    38400
+                                </option>
+
+                                <option value="57600">
+                                    57600
+                                </option>
+
+                                <option value="115200">
+                                    115200
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="parity">
+                                Parity
+                            </label>
+
+                            <select id="parity">
+
+                                <option value="N">
+                                    None
+                                </option>
+
+                                <option value="E">
+                                    Even
+                                </option>
+
+                                <option value="O">
+                                    Odd
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="stopBits">
+                                Stop Bit
+                            </label>
+
+                            <select id="stopBits">
+
+                                <option value="1">
+                                    1
+                                </option>
+
+                                <option value="2">
+                                    2
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="rtuSlaveId">
+                                Slave ID
+                            </label>
+
+                            <input
+                                type="number"
+                                id="rtuSlaveId"
+                                value="1"
+                            >
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ========================================
+                 3. PLC ADRES EŞLEŞTİRME
+            ========================================= -->
+            <div
+                class="card settings-card"
+                id="addressMappingSection"
+            >
+
+                <div class="card-title">
+                    🧩 PLC Adres Eşleştirme
+                </div>
+
+                <div class="settings-description">
+                    PLC programındaki motor kontrol ve durum
+                    adreslerini sistemdeki motorlarla eşleştirin.
+                </div>
+
+
+                <!-- MOTOR 1 -->
+                <div class="motor-mapping">
+
+                    <div class="section-subtitle">
+                        Motor 1
+                    </div>
+
+                    <div class="settings-grid">
+
+                        <div class="form-group">
+
+                            <label>
+                                Run Feedback
+                            </label>
+
+                            <input
+                                type="text"
+                                id="motor1Run"
+                                placeholder="Örn: M100"
+                            >
+
+                            <small>
+                                Motorun çalıştığını bildiren PLC biti.
+                            </small>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Start Command
+                            </label>
+
+                            <input
+                                type="text"
+                                id="motor1Start"
+                                placeholder="Örn: M101"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Stop Command
+                            </label>
+
+                            <input
+                                type="text"
+                                id="motor1Stop"
+                                placeholder="Örn: M102"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Fault
+                            </label>
+
+                            <input
+                                type="text"
+                                id="motor1Fault"
+                                placeholder="Örn: M103"
+                            >
+
+                            <small>
+                                Motor arıza geri bildirim biti.
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- MOTOR 2 -->
+                <div class="motor-mapping">
+
+                    <div class="section-subtitle">
+                        Motor 2
+                    </div>
+
+                    <div class="settings-grid">
+
+                        <div class="form-group">
+                            <label>Run Feedback</label>
+                            <input type="text" id="motor2Run" placeholder="Örn: M110">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Start Command</label>
+                            <input type="text" id="motor2Start" placeholder="Örn: M111">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Stop Command</label>
+                            <input type="text" id="motor2Stop" placeholder="Örn: M112">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Fault</label>
+                            <input type="text" id="motor2Fault" placeholder="Örn: M113">
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- MOTOR 3 -->
+                <div class="motor-mapping">
+
+                    <div class="section-subtitle">
+                        Motor 3
+                    </div>
+
+                    <div class="settings-grid">
+
+                        <div class="form-group">
+                            <label>Run Feedback</label>
+                            <input type="text" id="motor3Run" placeholder="Örn: M120">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Start Command</label>
+                            <input type="text" id="motor3Start" placeholder="Örn: M121">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Stop Command</label>
+                            <input type="text" id="motor3Stop" placeholder="Örn: M122">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Fault</label>
+                            <input type="text" id="motor3Fault" placeholder="Örn: M123">
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- MOTOR 4 -->
+                <div class="motor-mapping">
+
+                    <div class="section-subtitle">
+                        Motor 4
+                    </div>
+
+                    <div class="settings-grid">
+
+                        <div class="form-group">
+                            <label>Run Feedback</label>
+                            <input type="text" id="motor4Run" placeholder="Örn: M130">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Start Command</label>
+                            <input type="text" id="motor4Start" placeholder="Örn: M131">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Stop Command</label>
+                            <input type="text" id="motor4Stop" placeholder="Örn: M132">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Fault</label>
+                            <input type="text" id="motor4Fault" placeholder="Örn: M133">
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ========================================
+                 4. BAĞLANTI / KAYDET
+            ========================================= -->
+            <div class="card settings-card">
+
+                <div class="card-title">
+                    🔧 Bağlantı ve Yapılandırma
+                </div>
+
+
+                <div
+                    class="connection-status"
+                    id="connectionStatus"
+                >
+                    ● PLC bağlantısı henüz test edilmedi.
+                </div>
+
+
+                <div class="settings-actions">
+
+                    <button
+                        class="btn"
+                        id="testConnectionBtn"
+                        type="button"
+                    >
+                        🔌 Bağlantıyı Test Et
+                    </button>
+
+
+                    <button
+                        class="btn btn-primary"
+                        id="saveSettingsBtn"
+                        type="button"
+                    >
+                        💾 Ayarları Kaydet
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script src="js/settings.js"></script>
+
+</body>
+</html>

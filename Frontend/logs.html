@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Smart Food Factory — Sistem Logları</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<div class="app-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="sidebar-logo">
+            <div class="logo-icon">🏭</div>
+            <div class="logo-title">Smart Food Factory</div>
+            <div class="logo-sub">Monitoring System</div>
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <div class="nav-section">Genel</div>
+
+            <a href="index.html" class="nav-item">
+                <span class="nav-icon">🏠</span>
+                Dashboard
+            </a>
+
+
+            <div class="nav-section">Fabrika</div>
+
+            <a href="motors.html" class="nav-item">
+                <span class="nav-icon">⚙️</span>
+                Motorlar
+            </a>
+
+            <a href="sensors.html" class="nav-item">
+                <span class="nav-icon">🌡️</span>
+                Sensörler
+            </a>
+
+            <a href="energy.html" class="nav-item">
+                <span class="nav-icon">⚡</span>
+                Enerji
+            </a>
+
+
+            <div class="nav-section">İzleme</div>
+
+            <a href="alarms.html" class="nav-item">
+                <span class="nav-icon">🚨</span>
+                Alarmlar
+            </a>
+
+            <a href="logs.html" class="nav-item active">
+                <span class="nav-icon">📜</span>
+                Loglar
+            </a>
+
+        
+
+
+            <div class="nav-section">Sistem</div>
+
+            <a href="settings.html" class="nav-item">
+                <span class="nav-icon">⚙️</span>
+                Ayarlar
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-footer">
+
+            <div class="operator-card">
+
+                <div class="op-avatar" id="opAvatar">
+                    OP
+                </div>
+
+                <div class="op-info">
+
+                    <div class="op-name" id="opName">
+                        Operatör
+                    </div>
+
+                    <div class="op-role">
+                        Operatör
+                    </div>
+
+                </div>
+
+                <div class="op-status"></div>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+    <div class="main-area">
+
+
+        <!-- TOPBAR -->
+        <div class="topbar">
+
+            <div class="topbar-left">
+
+                <div class="page-title">
+                    Sistem Logları
+                </div>
+
+                <div class="page-sub">
+                    Fabrika sistem olay geçmişi
+                </div>
+
+            </div>
+
+
+            <div class="topbar-right">
+
+                <div
+                    class="status-badge ok"
+                    id="backendStatus"
+                >
+                    ● Sistem Aktif
+                </div>
+
+                <div
+                    class="topbar-clock"
+                    id="clock"
+                >
+                    00:00:00
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- PAGE CONTENT -->
+        <div class="page-content">
+
+
+            <!-- KPI -->
+            <div class="kpi-grid">
+
+                <div class="kpi-card blue">
+
+                    <div class="kpi-label">
+                        📋 Toplam Log
+                    </div>
+
+                    <div
+                        class="kpi-value blue"
+                        id="totalLogCount"
+                    >
+                        0
+                    </div>
+
+                    <div class="kpi-sub">
+                        Tüm sistem olayları
+                    </div>
+
+                </div>
+
+
+                <div class="kpi-card green">
+
+                    <div class="kpi-label">
+                        ▶ Motor İşlemleri
+                    </div>
+
+                    <div
+                        class="kpi-value green"
+                        id="motorLogCount"
+                    >
+                        0
+                    </div>
+
+                    <div class="kpi-sub">
+                        Start / Stop
+                    </div>
+
+                </div>
+
+
+                <div class="kpi-card red">
+
+                    <div class="kpi-label">
+                        🚨 Arıza Olayları
+                    </div>
+
+                    <div
+                        class="kpi-value red"
+                        id="faultLogCount"
+                    >
+                        0
+                    </div>
+
+                    <div class="kpi-sub">
+                        Motor arızaları
+                    </div>
+
+                </div>
+
+
+                <div class="kpi-card yellow">
+
+                    <div class="kpi-label">
+                        ✅ Alarm İşlemleri
+                    </div>
+
+                    <div
+                        class="kpi-value yellow"
+                        id="alarmLogCount"
+                    >
+                        0
+                    </div>
+
+                    <div class="kpi-sub">
+                        Onay ve reset
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- FILTRE -->
+            <div class="card">
+
+                <div class="card-title">
+                    🔎 Log Filtreleri
+                </div>
+
+                <div style="
+                    display:flex;
+                    gap:12px;
+                    flex-wrap:wrap;
+                    align-items:center;
+                ">
+
+                    <select id="eventFilter">
+
+                        <option value="all">
+                            Tüm Olaylar
+                        </option>
+
+                        <option value="motor_start">
+                            Motor Başlatma
+                        </option>
+
+                        <option value="motor_stop">
+                            Motor Durdurma
+                        </option>
+
+                        <option value="motor_fault">
+                            Motor Arızası
+                        </option>
+
+                        <option value="fault_reset">
+                            Arıza Reset
+                        </option>
+
+                        <option value="alarm_acknowledged">
+                            Alarm Onaylama
+                        </option>
+
+                    </select>
+
+
+                    <select id="sourceFilter">
+
+                        <option value="all">
+                            Tüm Kaynaklar
+                        </option>
+
+                        <option value="motor">
+                            Motor
+                        </option>
+
+                        <option value="alarm">
+                            Alarm
+                        </option>
+
+                    </select>
+
+
+                    <button
+                        class="btn btn-primary"
+                        id="refreshBtn"
+                    >
+                        ↻ Yenile
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- LOG TABLOSU -->
+            <div
+                class="card"
+                style="margin-top:16px;"
+            >
+
+                <div class="card-title">
+                    📜 Sistem Olay Geçmişi
+                </div>
+
+
+                <div style="overflow-x:auto;">
+
+                    <table style="
+                        width:100%;
+                        border-collapse:collapse;
+                        min-width:850px;
+                    ">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>ID</th>
+
+                                <th>Tarih / Saat</th>
+
+                                <th>Olay Türü</th>
+
+                                <th>Kaynak</th>
+
+                                <th>Açıklama</th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="logTableBody">
+
+                            <!-- logs.js dolduracak -->
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+
+                <div
+                    id="emptyLogMessage"
+                    style="
+                        display:none;
+                        text-align:center;
+                        padding:30px;
+                        color:#64748b;
+                    "
+                >
+                    Sistem log kaydı bulunamadı.
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script src="js/log.js"></script>
+
+</body>
+</html>

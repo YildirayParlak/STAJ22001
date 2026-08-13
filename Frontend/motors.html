@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Food Factory — Motorlar</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/motors.css">
+</head>
+<body>
+
+<div class="app-layout">
+
+    <!-- ===== SIDEBAR ===== -->
+    <aside class="sidebar">
+        <div class="sidebar-logo">
+            <div class="logo-icon">🏭</div>
+            <div class="logo-title">Smart Food Factory</div>
+            <div class="logo-sub">Monitoring System</div>
+        </div>
+
+        <nav class="sidebar-nav">
+            <div class="nav-section">Genel</div>
+            <a href="index.html" class="nav-item">
+                <span class="nav-icon">🏠</span> Dashboard
+            </a>
+
+            <div class="nav-section">Fabrika</div>
+            <a href="motors.html" class="nav-item active">
+                <span class="nav-icon">⚙️</span> Motorlar
+            </a>
+            <a href="sensors.html" class="nav-item">
+                <span class="nav-icon">🌡️</span> Sensörler
+            </a>
+            <a href="energy.html" class="nav-item">
+                <span class="nav-icon">⚡</span> Enerji
+            </a>
+
+            <div class="nav-section">İzleme</div>
+            <a href="alarms.html" class="nav-item">
+                <span class="nav-icon">🚨</span> Alarmlar
+            </a>
+            <a href="logs.html" class="nav-item">
+                <span class="nav-icon">📜</span> Loglar
+            </a>
+         
+
+            <div class="nav-section">Sistem</div>
+            <a href="settings.html" class="nav-item">
+                <span class="nav-icon">⚙️</span> Ayarlar
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <div class="operator-card">
+                <div class="op-avatar" id="opAvatar">AH</div>
+                <div class="op-info">
+                   <div class="op-avatar" id="opAvatar">OP</div>
+                        <div class="op-name" id="opName">Operatör</div>
+                </div>
+                <div class="op-status"></div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- ===== MAIN AREA ===== -->
+    <div class="main-area">
+
+        <!-- Top Bar -->
+        <div class="topbar">
+            <div class="topbar-left">
+                <div class="page-title">Motorlar</div>
+                <div class="page-sub">4 Motor — Kontrol ve İzleme</div>
+            </div>
+            <div class="topbar-right">
+                <div class="status-badge ok" id="plcStatus">
+    ● PLC Simülasyonu Aktif
+</div>
+                <div class="topbar-clock" id="clock">00:00:00</div>
+            </div>
+        </div>
+
+        <!-- Page Content -->
+        <div class="page-content">
+
+            <!-- Özet Satırı -->
+            <div class="kpi-grid" style="grid-template-columns: repeat(4,1fr); margin-bottom:20px;">
+                <div class="kpi-card green">
+                    <div class="kpi-label">Çalışan Motor</div>
+                    <div class="kpi-value green" id="runningCount">3 / 4</div>
+                    <div class="kpi-sub">Aktif hat</div>
+                </div>
+                <div class="kpi-card blue">
+                    <div class="kpi-label">Toplam RPM</div>
+                    <div class="kpi-value blue" id="totalRpm">4.330</div>
+                    <div class="kpi-sub">Ortalama devir</div>
+                </div>
+                <div class="kpi-card purple">
+                    <div class="kpi-label">Toplam Güç</div>
+                    <div class="kpi-value purple" id="totalPower">55.3 kW</div>
+                    <div class="kpi-sub">Anlık tüketim</div>
+                </div>
+                <div class="kpi-card red">
+                    <div class="kpi-label">Arıza</div>
+                    <div class="kpi-value red" id="faultCount">1</div>
+                    <div class="kpi-sub">Aktif arıza</div>
+                </div>
+            </div>
+
+            <!-- Motor Kartları -->
+            <div class="motors-page-grid">
+
+                <!-- ===== MOTOR 1 ===== -->
+                <div class="motor-card" id="motorCard1">
+
+                    <div class="motor-card-header">
+                        <div class="motor-card-title">
+                            <span class="motor-number">M1</span>
+                            <span class="motor-name">Konveyör Motor 1</span>
+                        </div>
+                        <div class="motor-card-status running" id="status1">
+                            ● Çalışıyor
+                        </div>
+                    </div>
+
+                    <div class="motor-card-body">
+
+                        <!-- Bilgi Satırları -->
+                        <div class="motor-info-row">
+                            <span class="motor-info-label">RPM</span>
+                            <span class="motor-info-value" id="rpm1">1.450</span>
+                        </div>
+                        <div class="motor-info-row">
+                            <span class="motor-info-label">Sıcaklık</span>
+                            <span class="motor-info-value warn" id="temp1">68.2 °C</span>
+                        </div>
+                        <div class="motor-info-row">
+                            <span class="motor-info-label">Güç Tüketimi</span>
+                            <span class="motor-info-value" id="power1">18.4 kW</span>
+                        </div>
+                        <div class="motor-info-row">
+                            <span class="motor-info-label">Çalışma Süresi</span>
+                            <span class="motor-info-value" id="uptime1">04s 32d</span>
+                        </div>
+                        <div class="motor-info-row">
+                            <span class="motor-info-label">Arıza Durumu</span>
+                            <span class="motor-info-value ok" id="fault1">Normal</span>
+                        </div>
+
+                        <!-- İlerleme Çubuğu (yük) -->
+                        <div class="motor-load-label">Motor Yükü</div>
+                        <div class="motor-load-bar">
+                            <div class="motor-load-fill" id="load1" style="width: 82%;"></div>
+                        </div>
+                        <div class="motor-load-percent" id="loadPct1">%82</div>
+
+                    </div>
+
+                    <!-- Kontrol Butonları -->
+                    <div class="motor-card-footer">
+    <button class="btn btn-green" onclick="motorStart(1)">▶ Başlat</button>
+
+    <button class="btn btn-red" onclick="motorStop(1)">■ Durdur</button>
+
+    <button
+        class="btn btn-yellow"
+        id="resetBtn1"
+        onclick="motorReset(1)"
+        style="display:none;"
+    >
+        ↻ Arıza Reset
+    </button>
+</div>
+
+                </div>
+                <!-- /MOTOR 1 -->
+
+                <!-- ===== MOTOR 2 ===== -->
+                <div class="motor-card" id="motorCard2">
+
+                    <div class="motor-card-header">
+                        <div class="motor-card-title">
+                            <span class="motor-number">M2</span>
+                            <span class="motor-name">Dolum Motor 2</span>
+                        </div>
+                        <div class="motor-card-status running" id="status2">
+                            ● Çalışıyor
+                        </div>
+                    </div>
+
+                    <div class="motor-card-body">
+
+                        <div class="motor-info-row">
+                            <span class="motor-info-label">RPM</span>
+                            <span class="motor-info-value" id="rpm2">1.380</span>
+                        </div>
+                        <div class="motor-info-row">
+                            <span class="motor-info-label">Sıcaklık</span>
+                            <span class="motor-info-value ok" id="temp2">55.0 °C</span>
+                        </div>
+                        <div class="motor-info-row">
+                            <span class="motor-info-label">Güç Tüketimi</span>
+                            <span class="motor-info-value" id="power2">15.7 kW</span>
+                        </div>
+                        <div class="motor-info-row">
+                            <span class="motor-info-label">Çalışma Süresi</span>
+                            <span class="motor-info-value" id="uptime2">03s 15d</span>
+                        </div>
+                        <div class="motor-info-row">
+                            <span class="motor-info-label">Arıza Durumu</span>
+                            <span class="motor-info-value ok" id="fault2">Normal</span>
+                        </div>
+
+                        <div class="motor-load-label">Motor Yükü</div>
+                        <div class="motor-load-bar">
+                            <div class="motor-load-fill" id="load2" style="width: 71%;"></div>
+                        </div>
+                        <div class="motor-load-percent" id="loadPct2">%71</div>
+
+                    </div>
+
+                   <div class="motor-card-footer">
+    <button class="btn btn-green" onclick="motorStart(2)">▶ Başlat</button>
+
+    <button class="btn btn-red" onclick="motorStop(2)">■ Durdur</button>
+
+    <button
+        class="btn btn-yellow"
+        id="resetBtn2"
+        onclick="motorReset(2)"
+        style="display:none;"
+    >
+        ↻ Arıza Reset
+    </button>
+</div>
+
+                </div>
+                <!-- /MOTOR 2 -->
+
+                <!-- ===== MOTOR 3 ===== -->
+                <div class="motor-card fault" id="motorCard3">
+
+                    <div class="motor-card-header">
+                        <div class="motor-card-title">
+                            <span class="motor-number">M3</span>
+                            <span class="motor-name">Paketleme Motor 3</span>
+                        </div>
+                     <div class="motor-card-status fault" id="status3">
+                                ⚠ Arızalı
+                                </div>
+                    </div>
+
+                    <div class="motor-card-body">
+
+                        <div class="motor-info-row">
+                            <span class="motor-info-label">RPM</span>
+                            <span class="motor-info-value" id="rpm3">0</span>
+                        </div>
+                        <div class="motor-info-row">
+                            <span class="motor-info-label">Sıcaklık</span>
+                            <span class="motor-info-value ok" id="temp3">24.0 °C</span>
+                        </div>
+                        <div class="motor-info-row">
+                            <span class="motor-info-label">Güç Tüketimi</span>
+                            <span class="motor-info-value" id="power3">0 kW</span>
+                        </div>
+                        <div class="motor-info-row">
+                            <span class="motor-info-label">Çalışma Süresi</span>
+                            <span class="motor-info-value" id="uptime3">00s 00d</span>
+                        </div>
+                        <div class="motor-info-row">
+                            <span class="motor-info-label">Arıza Durumu</span>
+                            <span class="motor-info-value alarm" id="fault3">⚠ Arıza</span>
+                        </div>
+
+                        <div class="motor-load-label">Motor Yükü</div>
+                        <div class="motor-load-bar">
+                            <div class="motor-load-fill" id="load3" style="width: 0%;"></div>
+                        </div>
+                        <div class="motor-load-percent" id="loadPct3">%0</div>
+
+                    </div>
+
+                    <div class="motor-card-footer">
+    <button class="btn btn-green" onclick="motorStart(3)">▶ Başlat</button>
+
+    <button class="btn btn-red" onclick="motorStop(3)">■ Durdur</button>
+
+    <button
+        class="btn btn-yellow"
+        id="resetBtn3"
+        onclick="motorReset(3)"
+        style="display:none;"
+    >
+        ↻ Arıza Reset
+    </button>
+</div>
+
+                </div>
+                <!-- /MOTOR 3 -->
+
+                <!-- ===== MOTOR 4 ===== -->
+                <div class="motor-card" id="motorCard4">
+
+                    <div class="motor-card-header">
+                        <div class="motor-card-title">
+                            <span class="motor-number">M4</span>
+                            <span class="motor-name">Soğutma Motor 4</span>
+                        </div>
+                        <div class="motor-card-status running" id="status4">
+                            ● Çalışıyor
+                        </div>
+                    </div>
+
+                    <div class="motor-card-body">
+
+                        <div class="motor-info-row">
+                            <span class="motor-info-label">RPM</span>
+                            <span class="motor-info-value" id="rpm4">1.500</span>
+                        </div>
+                        <div class="motor-info-row">
+                            <span class="motor-info-label">Sıcaklık</span>
+                            <span class="motor-info-value ok" id="temp4">60.5 °C</span>
+                        </div>
+                        <div class="motor-info-row">
+                            <span class="motor-info-label">Güç Tüketimi</span>
+                            <span class="motor-info-value" id="power4">21.2 kW</span>
+                        </div>
+                        <div class="motor-info-row">
+                            <span class="motor-info-label">Çalışma Süresi</span>
+                            <span class="motor-info-value" id="uptime4">06s 10d</span>
+                        </div>
+                        <div class="motor-info-row">
+                            <span class="motor-info-label">Arıza Durumu</span>
+                            <span class="motor-info-value ok" id="fault4">Normal</span>
+                        </div>
+
+                        <div class="motor-load-label">Motor Yükü</div>
+                        <div class="motor-load-bar">
+                            <div class="motor-load-fill" id="load4" style="width: 90%;"></div>
+                        </div>
+                        <div class="motor-load-percent" id="loadPct4">%90</div>
+
+                    </div>
+
+                    <div class="motor-card-footer">
+    <button class="btn btn-green" onclick="motorStart(4)">▶ Başlat</button>
+
+    <button class="btn btn-red" onclick="motorStop(4)">■ Durdur</button>
+
+    <button
+        class="btn btn-yellow"
+        id="resetBtn4"
+        onclick="motorReset(4)"
+        style="display:none;"
+    >
+        ↻ Arıza Reset
+    </button>
+</div>
+
+                </div>
+                <!-- /MOTOR 4 -->
+
+            </div>
+            <!-- /motors-page-grid -->
+
+        </div>
+        <!-- /page-content -->
+    </div>
+    <!-- /main-area -->
+
+</div>
+<!-- /app-layout -->
+
+<script src="js/motors.js"></script>
+</body>
+</html>
