@@ -1,0 +1,65 @@
+<mxfile host="app.diagrams.net" version="27.0.9">
+  <diagram name="ER Diyagramı" id="smart-factory-clean-erd">
+    <mxGraphModel dx="1426" dy="841" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <mxCell id="title" value="SMART FOOD FACTORY MONITORING SYSTEM&#xa;VERİTABANI ER DİYAGRAMI"
+          style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontStyle=1;fontSize=24;fontColor=#17365D;"
+          vertex="1" parent="1">
+          <mxGeometry x="380" y="25" width="900" height="70" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="motors" value="&lt;b&gt;MOTORS&lt;/b&gt;&lt;hr&gt;&lt;b&gt;PK&lt;/b&gt; id : INTEGER&lt;br&gt;name : TEXT&lt;br&gt;running : INTEGER&lt;br&gt;rpm : INTEGER&lt;br&gt;temperature : REAL&lt;br&gt;power : REAL&lt;br&gt;load : INTEGER&lt;br&gt;uptime_seconds : REAL&lt;br&gt;fault : INTEGER&lt;br&gt;started_at : REAL"
+          style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;align=left;verticalAlign=top;spacing=10;"
+          vertex="1" parent="1">
+          <mxGeometry x="120" y="190" width="300" height="330" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="alarms" value="&lt;b&gt;ALARMS&lt;/b&gt;&lt;hr&gt;&lt;b&gt;PK&lt;/b&gt; id : INTEGER&lt;br&gt;source_type : TEXT&lt;br&gt;source_id : INTEGER&lt;br&gt;message : TEXT&lt;br&gt;level : TEXT&lt;br&gt;active : INTEGER&lt;br&gt;acknowledged : INTEGER&lt;br&gt;created_at : TEXT&lt;br&gt;cleared_at : TEXT"
+          style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=14;align=left;verticalAlign=top;spacing=10;"
+          vertex="1" parent="1">
+          <mxGeometry x="520" y="170" width="300" height="310" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="logs" value="&lt;b&gt;SYSTEM_LOGS&lt;/b&gt;&lt;hr&gt;&lt;b&gt;PK&lt;/b&gt; id : INTEGER&lt;br&gt;event_type : TEXT&lt;br&gt;source_type : TEXT&lt;br&gt;source_id : INTEGER&lt;br&gt;message : TEXT&lt;br&gt;created_at : TEXT"
+          style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=14;align=left;verticalAlign=top;spacing=10;"
+          vertex="1" parent="1">
+          <mxGeometry x="520" y="600" width="300" height="235" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="users" value="&lt;b&gt;USERS&lt;/b&gt;&lt;hr&gt;&lt;b&gt;PK&lt;/b&gt; id : INTEGER&lt;br&gt;username : TEXT (UNIQUE)&lt;br&gt;password_hash : TEXT&lt;br&gt;fullname : TEXT&lt;br&gt;role : TEXT"
+          style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=14;align=left;verticalAlign=top;spacing=10;"
+          vertex="1" parent="1">
+          <mxGeometry x="120" y="650" width="300" height="205" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="plc" value="&lt;b&gt;PLC_SETTINGS&lt;/b&gt;&lt;hr&gt;&lt;b&gt;PK&lt;/b&gt; id : INTEGER&lt;br&gt;operation_mode : TEXT&lt;br&gt;plc_model : TEXT&lt;br&gt;connection_type : TEXT&lt;br&gt;ip_address : TEXT&lt;br&gt;port : INTEGER&lt;br&gt;com_port : TEXT&lt;br&gt;baud_rate : INTEGER&lt;br&gt;parity : TEXT&lt;br&gt;stop_bits : INTEGER&lt;br&gt;slave_id : INTEGER&lt;br&gt;motor1_run : TEXT&lt;br&gt;motor1_start : TEXT&lt;br&gt;motor1_stop : TEXT&lt;br&gt;motor1_fault : TEXT&lt;br&gt;motor2_run : TEXT&lt;br&gt;motor2_start : TEXT&lt;br&gt;motor2_stop : TEXT&lt;br&gt;motor2_fault : TEXT&lt;br&gt;motor3_run : TEXT"
+          style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=14;align=left;verticalAlign=top;spacing=10;"
+          vertex="1" parent="1">
+          <mxGeometry x="970" y="165" width="390" height="485" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="rel1" value="1                     N"
+          style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=none;startArrow=none;fontStyle=1;fontSize=14;"
+          edge="1" parent="1" source="motors" target="alarms">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="rel2" value="1                     N"
+          style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=none;startArrow=none;fontStyle=1;fontSize=14;"
+          edge="1" parent="1" source="motors" target="logs">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="rel3" value="1                     1"
+          style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=none;startArrow=none;fontStyle=1;fontSize=14;dashed=1;dashPattern=6 6;"
+          edge="1" parent="1" source="plc" target="motors">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
